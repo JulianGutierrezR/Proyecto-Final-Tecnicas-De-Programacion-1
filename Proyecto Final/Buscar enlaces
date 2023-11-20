@@ -1,0 +1,3 @@
+ public String buscarEnlace(String codigoHash) {
+        return enlaces.stream()
+                .filter(enlace -> enlace.getC

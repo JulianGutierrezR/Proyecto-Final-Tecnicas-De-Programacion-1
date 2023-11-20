@@ -1,0 +1,3 @@
+  public void agregarEnlace(String nombre, String enlace) {
+        if (!enlaceExistente(enlace)) {
+            agregarNuevoEnlace(new EnlaceYouTube(nombre, enlace, random.nextInt(201) + 120));

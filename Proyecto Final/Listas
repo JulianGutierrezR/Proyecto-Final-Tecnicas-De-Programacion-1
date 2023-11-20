@@ -1,0 +1,4 @@
+
+public class ListasDeYoutube {
+    final ArrayList<EnlaceYouTube> enlaces = new ArrayList<>();
+    private final Random random = new Random();

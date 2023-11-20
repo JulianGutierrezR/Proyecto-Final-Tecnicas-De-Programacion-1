@@ -1,0 +1,2 @@
+  public void eliminarEnlace(String codigoHash) {
+        enlaces.removeIf(enlace -> enlace.getCodigoHash().equals(codigoHash));
