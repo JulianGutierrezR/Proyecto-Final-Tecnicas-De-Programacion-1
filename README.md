@@ -1,5 +1,5 @@
 
- LinkedrList
+ LinkerList
 Este proyecto es una aplicación simple de lista de enlaces de YouTube con una interfaz gráfica de usuario construida en Java utilizando la biblioteca Swing y con la implementación de una lista enlazada (LinkerList).
 
 Funcionalidades
