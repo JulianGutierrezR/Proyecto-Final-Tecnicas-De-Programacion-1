@@ -9,7 +9,7 @@ Buscar Enlace: Busca un enlace por su nombre o letra.
 Cómo Usar
 Ejecuta la aplicación.
 Utiliza los botones para agregar, buscar y eliminar enlaces.
-La interfaz muestra los enlaces en formato HTML, con miniaturas de video y enlaces clicables.
+La interfaz muestra los enlaces en formato HTML, con el logo de la app y enlaces clicables.
 Clases Principales
 ListasDeYoutube
 Gestiona la lista enlazada de enlaces y proporciona operaciones básicas como agregar, eliminar y buscar.
