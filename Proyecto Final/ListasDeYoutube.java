@@ -12,6 +12,15 @@ import java.util.stream.Collectors;
 public class ListasDeYoutube {
     final ArrayList<EnlaceYouTube> enlaces = new ArrayList<>();
     private final Random random = new Random();
+    private String ultimaBusqueda = null;
+
+    public String getUltimaBusqueda() {
+        return ultimaBusqueda;
+    }
+
+    public void setUltimaBusqueda(String ultimaBusqueda) {
+        this.ultimaBusqueda = ultimaBusqueda;
+    }
 
     public void agregarEnlace(String nombre, String enlace) {
         if (!enlaceExistente(enlace)) {
@@ -19,15 +28,14 @@ public class ListasDeYoutube {
         }
     }
 
-  
-
     public void eliminarEnlace(String codigoHash) {
         enlaces.removeIf(enlace -> enlace.getCodigoHash().equals(codigoHash));
     }
 
-    public String buscarEnlace(String codigoHash) {
+    public String buscarPorNombre(String parametroBusqueda) {
+        ultimaBusqueda = parametroBusqueda;
         return enlaces.stream()
-                .filter(enlace -> enlace.getCodigoHash().equals(codigoHash))
+                .filter(enlace -> enlace.getNombre().toLowerCase().contains(parametroBusqueda.toLowerCase()))
                 .map(EnlaceYouTube::toString)
                 .collect(Collectors.joining("\n\n"));
     }
@@ -86,9 +94,13 @@ class InterfazUsuario {
         });
 
         JButton buscarButton = crearBoton("Buscar Enlace", e -> {
-            String codigoHash = JOptionPane.showInputDialog(frame, "Código Hash del Enlace:");
-            String resultado = lista.buscarEnlace(codigoHash);
-            textPane.setText(resultado);
+            String parametroBusqueda = JOptionPane.showInputDialog(frame, "Nombre a buscar:");
+            String resultado = lista.buscarPorNombre(parametroBusqueda);
+            mostrarVisualizacion(resultado);
+        });
+
+        JButton volverButton = crearBoton("Volver", e -> {
+            mostrarVisualizacion(lista.compartir());
         });
 
         JButton eliminarButton = crearBoton("Eliminar Enlace", e -> {
@@ -100,6 +112,7 @@ class InterfazUsuario {
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(agregarButton);
         buttonPanel.add(buscarButton);
+        buttonPanel.add(volverButton);
         buttonPanel.add(eliminarButton);
 
         frame.add(scrollPane, BorderLayout.CENTER);
@@ -123,7 +136,7 @@ class InterfazUsuario {
         }
     }
 
-    private void actualizarTextPane() {
+    private void mostrarVisualizacion(String resultado) {
         String contenidoHtml = "<html><style>" +
                 "div.enlace-container { border: 1px solid #808080; margin-bottom: 10px; padding: 10px; background-color: #808080; color: #ffffff; font-family: 'Arial', sans-serif; }" +
                 "table { border-collapse: collapse; width: 100%; }" +
@@ -131,12 +144,13 @@ class InterfazUsuario {
                 "img { max-width: 100%; height: auto; display: block; margin: 0 auto; }" +
                 "</style>";
 
-        for (EnlaceYouTube enlace : lista.enlaces) {
+        String[] enlacesArray = resultado.split("\n\n");
+        for (String enlace : enlacesArray) {
             contenidoHtml += "<div class='enlace-container'>";
             contenidoHtml += "<table>";
             contenidoHtml += "<tr>";
             contenidoHtml += "<td><img src='" + LOGO_URL + "'></td>";
-            contenidoHtml += "<td>" + enlace.toString() + "</td>";
+            contenidoHtml += "<td>" + enlace + "</td>";
             contenidoHtml += "</tr>";
             contenidoHtml += "</table>";
             contenidoHtml += "</div>";
@@ -144,6 +158,11 @@ class InterfazUsuario {
 
         contenidoHtml += "</html>";
         textPane.setText(contenidoHtml);
+    }
+
+    private void actualizarTextPane() {
+        String resultado = lista.compartir();
+        mostrarVisualizacion(resultado);
     }
 }
 
@@ -160,11 +179,8 @@ class EnlaceYouTube {
         this.codigoHash = String.valueOf(enlace.hashCode());
     }
 
-    public EnlaceYouTube(String enlace, String codigoHash, int duracion) {
-        this.nombre = "N/A";
-        this.enlace = enlace;
-        this.duracion = duracion;
-        this.codigoHash = codigoHash;
+    public String getNombre() {
+        return nombre;
     }
 
     public String getCodigoHash() {
