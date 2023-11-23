@@ -13,7 +13,6 @@ La interfaz muestra los enlaces en formato HTML, con el logo de la app y enlaces
 Clases Principales
 ListasDeYoutube
 Gestiona la lista enlazada de enlaces y proporciona operaciones básicas como agregar, eliminar y buscar.
-Incluye métodos para compartir la lista y obtener la última búsqueda realizada.
 InterfazUsuario
 Interfaz gráfica de usuario con botones para interactuar con la lista enlazada.
 Utiliza HTML para formatear y mostrar la información de los enlaces.
