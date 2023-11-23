@@ -19,6 +19,6 @@ Utiliza HTML para formatear y mostrar la información de los enlaces.
 Permite la interacción directa con los enlaces, como abrirlos en el navegador.
 EnlaceYouTube
 Representación de un enlace de YouTube con información asociada como nombre, enlace y duración.
-Proporciona una miniatura del video y un código hash único para identificación.
+Proporciona un logo oficial de la app y un código hash único para identificación.
 Ofrece una representación formateada del enlace para su visualización.
-U
+
